@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>中二节奏单曲Rating计算器</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+</style>
+</head>
+<body>
+    <h2>中二节奏单曲Rating计算器</h2>
+    <p>由Leo韩制作，如需了解更多，请访问www.leohan.cool</p>
+    <p>输入铺面定级和铺面分数，计算单曲Rating。</p>
+
+    
+    <label for="fxnInput">铺面定级：</label>
+    <input type="number" id="fxnInput" step="any" required>
+    <br><br>
+    
+    <label for="scInput">铺面分数：</label>
+    <input type="number" id="scInput" step="any" required>
+    <br><br>
+    
+    <button onclick="calculateRating()">计算评级</button>
+    <br><br>
+    
+    <div id="result"></div>
+    
+    <script>
+        function chu_single_song_rating_counting(sc, fxn) {
+            let ans = 0.00;
+            if (900000 <= sc && sc <= 974999) {
+                ans = (fxn - 5) + (sc - 900000) / 15000;
+            } else if (975000 <= sc && sc <= 999999) {
+                ans = fxn + (sc - 975000) / 25000;
+            } else if (1000000 <= sc && sc <= 1004999) {
+                ans = fxn + 1 + (sc - 1000000) / 10000;
+            } else if (1005000 <= sc && sc <= 1007499) {
+                ans = fxn + 1.5 + (sc - 1005000) / 5000;
+            } else if (1007500 <= sc && sc <= 1008999) {
+                ans = fxn + 2.0 + (sc - 1007500) / 10000;
+            } else if (sc >= 1009000) {
+                ans = fxn + 2.15;
+            }
+            if (ans >= 0.00) {
+                return ans.toFixed(2); // 保留两位小数
+            } else {
+                return 0.00; 
+            }
+        }
+        
+        function calculateRating() {
+            let fxn = parseFloat(document.getElementById("fxnInput").value);
+            let sc = parseFloat(document.getElementById("scInput").value);
+            
+            if (isNaN(fxn) || isNaN(sc)) {
+                alert("请输入有效的数字。");
+                return;
+            }
+            
+            let rating = chu_single_song_rating_counting(sc, fxn);
+            document.getElementById("result").innerHTML = "您的单曲Rating为: " + rating;
+        }
+    </script>
+</body>
+</html>
